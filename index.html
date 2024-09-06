@@ -10,15 +10,16 @@
     <div class="container">
         <h1>Skibidi Coon Clicker</h1>
         <div id="coon-count">Coons: 0</div>
-        
+
         <!-- Coon Clicker Button (Skibidi Coon Image) -->
         <div class="clicker">
             <img id="coon-image" src="skibidi-coon.png" alt="Skibidi Coon" width="200" onclick="clickCoon()">
         </div>
 
-        <!-- Buy Cursor Button -->
+        <!-- Buy and Sell Cursor Buttons -->
         <div id="cursor-section">
-            <button id="buy-cursor-btn" onclick="buyCursor()">Buy Cursor (10 Coons)</button>
+            <button id="buy-cursor-btn" onclick="buyCursor()">Buy Cursor (<span id="cursor-price">10</span> Coons)</button>
+            <button id="sell-cursor-btn" onclick="sellCursor()">Sell Cursor (Receive <span id="sell-price">5</span> Coons)</button>
             <p id="cursor-count">Cursors: 0 (0.1 coons per second per cursor)</p>
         </div>
     </div>
