@@ -1,0 +1,34 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f2f2f2;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+#coon-count {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+.clicker img {
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+.clicker img:active {
+    transform: scale(0.9);
+}
+
+#buy-cursor-btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#cursor-count {
+    margin-top: 10px;
+}
