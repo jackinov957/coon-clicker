@@ -1,7 +1,10 @@
 let coons = 0; // Total number of coons
 let cursors = 0; // Number of cursors
-let coonsPerSecond = 0.1; // Coons generated per second by each cursor
+let baseCoonsPerSecond = 0.1; // Base coons generated per second by each cursor
+let coonsPerSecond = baseCoonsPerSecond; // Coons generated per second by each cursor
 let cursorPrice = 10; // Initial price for the first cursor
+let clickPower = 1; // Amount of coons per click
+let upgradePurchased = false; // Track if upgrade has been purchased
 
 // Update the displayed coon count
 function updateCoonCount() {
@@ -15,9 +18,19 @@ function updateCursorCount() {
     document.getElementById("sell-price").innerText = (cursorPrice / 2).toFixed(1); // Selling for half the price
 }
 
+// Update the displayed upgrade status
+function updateUpgradeStatus() {
+    if (upgradePurchased) {
+        document.getElementById("upgrade-status").innerText = "Upgrade status: Purchased!";
+        document.getElementById("buy-upgrade-btn").disabled = true; // Disable button once bought
+    } else {
+        document.getElementById("upgrade-status").innerText = "Upgrade status: Not purchased";
+    }
+}
+
 // Function for clicking the Skibidi Coon image
 function clickCoon() {
-    coons += 1;
+    coons += clickPower;
     updateCoonCount();
 }
 
@@ -47,6 +60,21 @@ function sellCursor() {
     }
 }
 
+// Function to buy the upgrade
+function buyUpgrade() {
+    if (coons >= 100) {
+        coons -= 100;
+        upgradePurchased = true;
+        coonsPerSecond = baseCoonsPerSecond * 2; // Double cursor efficiency
+        clickPower = 2; // Double the click power
+        updateCoonCount();
+        updateCursorCount();
+        updateUpgradeStatus();
+    } else {
+        alert("Not enough coons to buy the upgrade!");
+    }
+}
+
 // Function to automatically add coons based on the number of cursors
 function generateCoons() {
     coons += cursors * coonsPerSecond;
@@ -59,4 +87,5 @@ setInterval(generateCoons, 1000);
 // Initialize the counts on page load
 updateCoonCount();
 updateCursorCount();
+updateUpgradeStatus();
 
