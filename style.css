@@ -22,18 +22,49 @@ body {
     transform: scale(0.9);
 }
 
-#buy-cursor-btn, #sell-cursor-btn, #buy-upgrade-btn {
+#buy-plunger-btn, #sell-plunger-btn, #buy-upgrade-btn {
     margin-top: 20px;
     padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
 }
 
-#cursor-count, #upgrade-status {
+#plunger-count, #upgrade-status {
     margin-top: 10px;
 }
 
-/* Make sure the upgrade button is visible and has space */
-#upgrade-section {
+/* Make sure the plunger box is styled properly */
+#plunger-box {
     margin-top: 30px;
+    padding: 10px;
+    border: 2px solid #333;
+    display: inline-block;
+    position: relative;
+    width: 220px; /* Adjust width as needed */
+    height: 220px; /* Adjust height as needed */
+    overflow: hidden;
+    background-color: #fff;
+}
+
+#plunger-box h2 {
+    margin: 0;
+    padding-bottom: 10px;
+}
+
+#plunger-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 5px;
+}
+
+#plunger-container img {
+    width: 50px; /* Adjust size as needed */
+    height: 50px; /* Adjust size as needed */
 }
