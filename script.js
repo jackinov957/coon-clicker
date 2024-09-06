@@ -1,8 +1,8 @@
 let coons = 0; // Total number of coons
-let cursors = 0; // Number of cursors
-let baseCoonsPerSecond = 0.1; // Base coons generated per second by each cursor
-let coonsPerSecond = baseCoonsPerSecond; // Coons generated per second by each cursor
-let cursorPrice = 10; // Initial price for the first cursor
+let plungers = 0; // Number of plungers
+let baseCoonsPerSecond = 0.1; // Base coons generated per second by each plunger
+let coonsPerSecond = baseCoonsPerSecond; // Coons generated per second by each plunger
+let plungerPrice = 10; // Initial price for the first plunger
 let clickPower = 1; // Amount of coons per click
 let upgradePurchased = false; // Track if upgrade has been purchased
 
@@ -11,11 +11,12 @@ function updateCoonCount() {
     document.getElementById("coon-count").innerText = `Coons: ${coons.toFixed(1)}`;
 }
 
-// Update the displayed cursor count and price
-function updateCursorCount() {
-    document.getElementById("cursor-count").innerText = `Cursors: ${cursors} (${(cursors * coonsPerSecond).toFixed(1)} coons per second)`;
-    document.getElementById("cursor-price").innerText = cursorPrice.toFixed(1);
-    document.getElementById("sell-price").innerText = (cursorPrice / 2).toFixed(1); // Selling for half the price
+// Update the displayed plunger count and price
+function updatePlungerCount() {
+    document.getElementById("plunger-count").innerText = `Plungers: ${plungers}`;
+    document.getElementById("plunger-price").innerText = plungerPrice.toFixed(1);
+    document.getElementById("sell-price").innerText = (plungerPrice / 2).toFixed(1); // Selling for half the price
+    updatePlungerBox();
 }
 
 // Update the displayed upgrade status
@@ -34,29 +35,29 @@ function clickCoon() {
     updateCoonCount();
 }
 
-// Function to buy a cursor
-function buyCursor() {
-    if (coons >= cursorPrice) {
-        coons -= cursorPrice;
-        cursors += 1;
-        cursorPrice = 10 * Math.pow(1.15, cursors); // Increase cursor price by 1.15 times per cursor
+// Function to buy a plunger
+function buyPlunger() {
+    if (coons >= plungerPrice) {
+        coons -= plungerPrice;
+        plungers += 1;
+        plungerPrice = 10 * Math.pow(1.15, plungers); // Increase plunger price by 1.15 times per plunger
         updateCoonCount();
-        updateCursorCount();
+        updatePlungerCount();
     } else {
-        alert("Not enough coons to buy a cursor!");
+        alert("Not enough coons to buy a plunger!");
     }
 }
 
-// Function to sell a cursor
-function sellCursor() {
-    if (cursors > 0) {
-        cursors -= 1;
-        coons += cursorPrice / 2; // Gain half the current cursor price
-        cursorPrice = 10 * Math.pow(1.15, cursors); // Recalculate the price of a cursor after selling
+// Function to sell a plunger
+function sellPlunger() {
+    if (plungers > 0) {
+        plungers -= 1;
+        coons += plungerPrice / 2; // Gain half the current plunger price
+        plungerPrice = 10 * Math.pow(1.15, plungers); // Recalculate the price of a plunger after selling
         updateCoonCount();
-        updateCursorCount();
+        updatePlungerCount();
     } else {
-        alert("No cursors to sell!");
+        alert("No plungers to sell!");
     }
 }
 
@@ -65,20 +66,32 @@ function buyUpgrade() {
     if (coons >= 100) {
         coons -= 100;
         upgradePurchased = true;
-        coonsPerSecond = baseCoonsPerSecond * 2; // Double cursor efficiency
+        coonsPerSecond = baseCoonsPerSecond * 2; // Double plunger efficiency
         clickPower = 2; // Double the click power
         updateCoonCount();
-        updateCursorCount();
+        updatePlungerCount();
         updateUpgradeStatus();
     } else {
         alert("Not enough coons to buy the upgrade!");
     }
 }
 
-// Function to automatically add coons based on the number of cursors
+// Function to automatically add coons based on the number of plungers
 function generateCoons() {
-    coons += cursors * coonsPerSecond;
+    coons += plungers * coonsPerSecond;
     updateCoonCount();
+}
+
+// Function to update the plunger box visual
+function updatePlungerBox() {
+    const container = document.getElementById("plunger-container");
+    container.innerHTML = ''; // Clear the current plungers
+    for (let i = 0; i < plungers; i++) {
+        const img = document.createElement("img");
+        img.src = "plunger.png";
+        img.alt = "Plunger";
+        container.appendChild(img);
+    }
 }
 
 // Start generating coons every second
@@ -86,6 +99,5 @@ setInterval(generateCoons, 1000);
 
 // Initialize the counts on page load
 updateCoonCount();
-updateCursorCount();
+updatePlungerCount();
 updateUpgradeStatus();
-
